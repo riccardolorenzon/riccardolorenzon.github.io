@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Hello Hugo - Riccardo Lorenzon&#39;s blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:title" content="Hello Hugo" />
+<meta property="og:description" content="My first post on this blog is dedicated to the blog itself, and more precisely to the technology that i used to get it up and running.
+First, i worked with a few CMS tools in the past, mostly for friends that wanted a quick page on the internet for their wedding, birthdays, etc etc. I remember how easy it was to set up a Wordpress website and make it beautiful by buying a 15$ template." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://pizzaandcode.com/posts/hello-hugo/" />
+<meta property="article:published_time" content="2019-09-19T21:11:57+02:00" />
+<meta property="article:modified_time" content="2019-09-19T21:11:57+02:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Hello Hugo"/>
+<meta name="twitter:description" content="My first post on this blog is dedicated to the blog itself, and more precisely to the technology that i used to get it up and running.
+First, i worked with a few CMS tools in the past, mostly for friends that wanted a quick page on the internet for their wedding, birthdays, etc etc. I remember how easy it was to set up a Wordpress website and make it beautiful by buying a 15$ template."/>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:500,100,300" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" /><script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script><script src="/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper post">
+		<div class="header">
+	<h1 class="site-title">Riccardo Lorenzon&#39;s blog</h1>
+	<div class="site-description"><h2>A blog of a coding and pizza eater specialist.</h2><nav class="nav social">
+			<ul class="flat"><a href="//github.com/riccardolorenzon" title="Github"><i data-feather="github"></i></a><a href="https://twitter.com/ricky111986" title="Twitter"><i data-feather="twitter"></i></a></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/about">About</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post-header">
+			<h1 class="title">Hello Hugo</h1>
+			<div class="meta">Posted at &mdash; Sep 19, 2019</div>
+		</div>
+
+		<div class="markdown">
+			<p>My first post on this blog is dedicated to the blog itself, and more precisely to the technology that i used to get it up and running.</p>
+
+<p>First, i worked with a few CMS tools in the past, mostly for friends that wanted a quick page on the internet for their wedding, birthdays, etc etc.
+I remember how easy it was to set up a Wordpress website and make it beautiful by buying a 15$ template. I do also remember how painful and frustrating it was to apply changes and especially how slow the site would have become in the short time.</p>
+
+<p>Since then i avoided using Wordpress as much as i could, choosing to create the html pages and static assets and serving them via an nginx server. THat requires much more effort, but at the end it really pays off!</p>
+
+<p>Recently i found on HN many articles talking about <a href="https://gohugo.io/">Hugo</a>, a static site generator written in Go. I couldn&rsquo;t wait to try it and this blog was the pefect fit for that.</p>
+
+<p>My idea was to use Hugo in order to create a static website, hosting it on <a href="https://pages.github.com/">Github Pages</a> and redirecting a 7$ domain bough on <a href="https://www.dynadot.com/">Dynadot</a> to it, sounds easy, let&rsquo;s give it a try!</p>
+
+<p>First you will need to install Go:</p>
+
+<p>‘brew install go‘</p>
+
+<p>Then Hugo of course:</p>
+
+<p>‘brew install hugo‘</p>
+
+<p>I suggest then to create a directory, called websites, that you will use to host your website, and maybe others:</p>
+
+<p><code>mkdir websites</code> and then <code>cd websites</code>.</p>
+
+<p>Run now the Hugo command to create your static website:</p>
+
+<p><code>hugo new site yourwebsitename</code></p>
+
+<p>You should see the following propmpt:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">Congratulations! Your new Hugo site is created in /Users/YourName/Sites/yoursitename.
+
+Just a few more steps and you&#39;re ready to go:
+
+1. Download a theme into the same-named folder.
+Choose a theme from https://themes.gohugo.io/, or
+create your own with the &#34;hugo new theme &lt;THEMENAME&gt;&#34; command.
+2. Perhaps you want to add some content. You can add single files
+with &#34;hugo new &lt;SECTIONNAME&gt;/&lt;FILENAME&gt;.&lt;FORMAT&gt;&#34;.
+3. Start the built-in live server via &#34;hugo server&#34;.
+
+Visit https://gohugo.io/ for quickstart guide and full documentation.</pre></div>
+<p>Comgratulations! you hugo site is created, now time to make it beautiful and add some content.</p>
+
+<p>Hugo provides a list of <a href="https://themes.gohugo.io/">themes</a> for that. The theme can be easily downloaded and put in the ‘/themes‘ folder, but i really recommend to install it as a ‘git‘ ‘submoduile‘ in such a way to make it easily updatable:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">git init
+git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke
+echo &#39;theme = &#34;ananke&#34;&#39; &gt;&gt; config.toml</pre></div>
+<p>You can then put some content, like creating your first blog post:</p>
+
+<p><code>hugo new posts/website-first-post.md</code></p>
+
+<p>That&rsquo;s it, we can now run the local Hugo server and see if everything is working fine.</p>
+
+<p><code>hugo server -D</code></p>
+
+<p>Connect now to <code>localhost:1313</code> and check if your website is up and running.</p>
+
+<p>Now it&rsquo;s time to publish our newly created static website. We are gonna used as i mentioned earlier Github Pages.
+Github Pages is a free static hosting service offered by Github meant to be used for personal or project pages. Deploying a website connected to the url <code>&lt;githubusername&gt;.github.io</code> is quite straighforward.
+All it takes is:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">mkdir &lt;username&gt;.github.io` &amp;&amp; `cd &lt;username&gt;.github.io
+git init
+git remote add origin &lt;github ssh&gt;
+touch index.html
+echo &#34;&lt;html&gt; hello world&lt;!html&gt;&#34; &gt;&gt; index.html
+git add . 
+git commit -m &#34;Hello world.&#34;
+git push</pre></div>
+<p>Now that we saw how to do it we can do the same for our Hugo.</p>
+
+<p>First let&rsquo;s generate the static content, we will choose to set the content on the folder <code>&lt;githubusername&gt;.github.io</code>.
+We can do this by setting the path on the file <code>config.toml</code>: <code>publishdir = &quot;/Users/riccardo/Documents/riccardolorenzon.github.io</code> specifying in this way the folder the generator is supposed to write the static content into.</p>
+
+<p>After that, let&rsquo;s generate the content:</p>
+
+<p><code>hugo</code></p>
+
+<p>Once the command finished you can notice on the folder <code>&lt;githubusername&gt;.github.io</code> that a lot of files have been added.
+It&rsquo;s time to commit our hard work and enjoy our new website!</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">git add . 
+git commit -m &#34;Hugo website.&#34;
+git push</pre></div>
+<p>You can now connect to <code>&lt;githubusername&gt;.github.io</code> and check that everything works properly.</p>
+
+<p>If you want you can add a custom url, for that you can purchase it on any domain register sites, i used <a href="https://dynadot.com">dynadot</a> for this.
+After you must connect your domain to the website itself. You can do that by creating an <code>A Record</code> on the domain service of your choice, although usually domain register offer one to use directly. The <code>A Record</code> must point the domain to this list of IP addresses: <code>185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153</code>.
+You also need to add a file <code>CNAME</code>, to your github repository, the file must contain a single line with the domain you registered.</p>
+
+<p>That&rsquo;s it! Thanks for reading this post.</p>
+
+		</div></div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div><a href="https://github.com/vividvilla/ezhil">Ezhil theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+<script>feather.replace()</script>
+</body>
+</html>
