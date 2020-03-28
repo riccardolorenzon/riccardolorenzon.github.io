@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Riccardo Lorenzon&#39;s blog</title>
@@ -6,10 +6,20 @@
     <description>Recent content on Riccardo Lorenzon&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 19 Sep 2019 21:11:57 +0200</lastBuildDate>
+    <lastBuildDate>Thu, 19 Sep 2019 19:06:43 +0200</lastBuildDate>
     
 	<atom:link href="http://pizzaandcode.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How to create a Chat application using Flask and React</title>
+      <link>http://pizzaandcode.com/posts/chat/</link>
+      <pubDate>Sat, 28 Mar 2020 17:24:47 +0100</pubDate>
+      
+      <guid>http://pizzaandcode.com/posts/chat/</guid>
+      <description>It&amp;rsquo;s been a while since my last post on this blog. I travelled a lot in the begin of this year, and i consider myself like to have done it before the global spread of the Covid-19.
+I&amp;rsquo;m now working from home everyday, this saves me some time on the commute, that i can spend on reading and learning some new stuff. In this context i decided to create a chat application using React and Flask, mostly to try out new features of React 16.</description>
+    </item>
     
     <item>
       <title>Hello Hugo</title>
