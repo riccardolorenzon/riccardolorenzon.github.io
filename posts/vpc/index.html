@@ -86,9 +86,11 @@ In order to create an IG, go to Internet gateways &gt; Create internet gateway, 
 <p>In order to our application to run, we need to install a web server and a database server.<br>
 For what concerns the web server, we are gonna install <code>httpd</code>, <code>php</code> and then add download wordpress in <code>/var/www/html</code>.<br>
 Let&rsquo;s start by creating a linux instance in EC2.
-Assign the VPC we created in the &ldquo;Configure Instance Details&rdquo; page, edit the &ldquo;User data&rdquo; with the commands to run when the instance is created:
+Assign the VPC and the public subnet we created in the &ldquo;Configure Instance Details&rdquo; page, edit the &ldquo;User data&rdquo; with the commands to run when the instance is created:
 <img src="/instance_details.png" alt="image"></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">yum install httpd -y
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#00f">#!/bin/bash
+</span><span style="color:#00f"></span>yum update -y
+yum install httpd -y
 amazon-linux-extras install -y php7.2
 systemctl enable httpd
 systemctl start httpd
@@ -99,9 +101,25 @@ mv wordpress/* ./
 </code></pre></div><p>Make sure to specify on the security group to add HTTP and HTTPS from the internet in the inbound rules:
 <img src="/inbound_rules.png" alt="image"></p>
 <h3 id="create-the-db-instancee">Create the DB instancee</h3>
-<h3 id="connect-the-web-server-to-the-db-instance">Connect the WEB server to the DB instance</h3>
-<h3 id="connect-db-instance-to-the-internet">Connect DB instance to the internet</h3>
-<h3 id="conclusions">Conclusions</h3>
+<p>For the DB instance we will follow the same procedure of the previous point to create a new instance.<br>
+The subnet we will choose is the private one.<br>
+This time we will configure the script in order to install mysql.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#00f">#!/bin/bash
+</span><span style="color:#00f"></span>yum update -y 
+yum install mysql-server 
+systemctl enable mysqld 
+systemctl start mysqld
+</code></pre></div><h3 id="connect-the-web-server-to-the-db-instance">Connect the WEB server to the DB instance</h3>
+<p>We need to connect the web server to the database, in order to do so, we change the security group of the DB in order to allow mysql connection from the web server.
+<img src="/db_security_group_inbound_rules.png" alt="image"></p>
+<h3 id="conclusion">Conclusion</h3>
+<p>My conclusion is that aws allows to easily set up a simple web application.<br>
+Some things to point out:</p>
+<ul>
+<li>there is no HA here, single point of failure both in the application and data layer</li>
+<li>installing and maintaining a dbms requires a significant amount of effort to patch it and keep it stable, plus of course we have to set up backup/restore and all the services we need.</li>
+</ul>
+<p>If i had to go to production i would revisit the design to include a load balancer, a scalable application group, and i would use Aurora for the data layer.</p>
 
 		</div></div>
 	<div class="footer wrapper">
