@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Riccardo Lorenzon&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Mar 2020 17:24:47 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 31 Mar 2020 18:25:45 +0200</lastBuildDate>
     
 	<atom:link href="http://pizzaandcode.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using AWS Vpc to set up a Wordpress application</title>
+      <link>http://pizzaandcode.com/posts/vpc/</link>
+      <pubDate>Tue, 31 Mar 2020 18:25:45 +0200</pubDate>
+      
+      <guid>http://pizzaandcode.com/posts/vpc/</guid>
+      <description>For several projects i&amp;rsquo;m currently working on, a AWS Solution Architect associate certification is required.
+I don&amp;rsquo;t actually believe in certifications as a way to prove any kind of knowledge, i found them useful to have an overview of how a certain product or service work and which kind of problems it&amp;rsquo;s meant to solve.
+Having worked with AWS for more than 5 years i can say that i got my hands dirty with most of the topics involved.</description>
+    </item>
     
     <item>
       <title>How to create a Chat application using Flask and React</title>
