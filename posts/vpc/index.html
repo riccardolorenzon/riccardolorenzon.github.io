@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Using AWS Vpc to set up a Wordpress application - Riccardo Lorenzon&#39;s blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:title" content="Using AWS Vpc to set up a Wordpress application" />
 <meta property="og:description" content="For several projects i&rsquo;m currently working on, a AWS Solution Architect associate certification is required.
-I don&rsquo;t actually believe in certifications as a way to prove any kind of knowledge, i found them useful to have an overview of how a certain product or service work and which kind of problems it&rsquo;s meant to solve.
+I don&rsquo;t actually believe in certifications as a way to prove any kind of knowledge, i found them useful to have an overview of how a certain product or service works and which kind of problems it&rsquo;s meant to solve.
 Having worked with AWS for more than 5 years i can say that i got my hands dirty with most of the topics involved." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://pizzaandcode.com/posts/vpc/" />
@@ -14,7 +14,7 @@ Having worked with AWS for more than 5 years i can say that i got my hands dirty
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Using AWS Vpc to set up a Wordpress application"/>
 <meta name="twitter:description" content="For several projects i&rsquo;m currently working on, a AWS Solution Architect associate certification is required.
-I don&rsquo;t actually believe in certifications as a way to prove any kind of knowledge, i found them useful to have an overview of how a certain product or service work and which kind of problems it&rsquo;s meant to solve.
+I don&rsquo;t actually believe in certifications as a way to prove any kind of knowledge, i found them useful to have an overview of how a certain product or service works and which kind of problems it&rsquo;s meant to solve.
 Having worked with AWS for more than 5 years i can say that i got my hands dirty with most of the topics involved."/>
 <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:500,100,300" rel="stylesheet">
 
@@ -54,38 +54,39 @@ Having worked with AWS for more than 5 years i can say that i got my hands dirty
 
 		<div class="markdown">
 			<p>For several projects i&rsquo;m currently working on, a <a href="https://aws.amazon.com/certification/certified-solutions-architect-associate/">AWS Solution Architect associate certification</a> is required.</p>
-<p>I don&rsquo;t actually believe in certifications as a way to prove any kind of knowledge, i found them useful to have an overview of how a certain product or service work and which kind of problems it&rsquo;s meant to solve.</p>
+<p>I don&rsquo;t actually believe in certifications as a way to prove any kind of knowledge, i found them useful to have an overview of how a certain product or service works and which kind of problems it&rsquo;s meant to solve.</p>
 <p>Having worked with AWS for more than 5 years i can say that i got my hands dirty with most of the topics involved. Although some of them are completely new, and i must say, interesting.</p>
 <p>One that grabbed my attention is <a href="https://aws.amazon.com/vpc/">Amazon VPC</a>. VPC lets you provision a logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network that you define. Most important is that you can define additional subnetwork within the network, with different access security rules.</p>
-<p>I found VPC a terrific tool to be used to set up an environment for a common web application, like for example <a href="https://wordpress.com/">Wordpress</a>. I decided then to dedicate one post on how to set up a Wordpress application using VPC(disclaimer: i don&rsquo;t really like WP, but i find it extremly easy to set up, therefore this choice).
+<p>I found VPC a terrific tool to be used to set up an environment for a common web application, like for example <a href="https://wordpress.com/">Wordpress</a>. I decided then to dedicate one post on how to set up a Wordpress application using VPC(disclaimer: i don&rsquo;t really like WP, but i find it extremly easy to set up, therefore this choice).<br>
 This is what we are gonna create:
 <img src="/architecture_of_vpc.png" alt="image"></p>
 <h3 id="requirements">Requirements</h3>
 <ul>
-<li>an existing aws account(Amazon offen a free tier account as well)</li>
+<li>an existing aws account(Amazon offen a free tier for new accounts)</li>
 </ul>
 <h3 id="creating-the-vpc">Creating the VPC</h3>
-<p>First thing to do is to connect to your aws console.
+<p>First thing to do is to connect to our aws console.
 Then create a new VPC(VPCs &gt; Create VPC), specifying:
 <img src="/create_vpc.png" alt="image">
-As you can see, out VPC will use IPs ranging from 10.0.0.0 to 10.0.255.255. according to the CIDR notation.
+As you can see, our VPC will use IPs ranging from <code>10.0.0.0</code> to <code>10.0.255.255</code>. according to the CIDR notation.
 The next step will be to create two subnets within the VPC, one publicly accessible via http or https and reserved to the web application, the other dedicated to the db, not publicly accessible, but still accessible from the web server and from a sysadmin via SSH.</p>
 <h3 id="creating-the-public-subnet">Creating the public subnet</h3>
 <p>To create the public subnet, go to Subnets &gt; Create subnet, specify the VPC you created on the previous step, and assign as IPv4 CIDR block <code>10.0.1.0/24</code>. You can choose another IP range if you want, it&rsquo;s important that this IP range is contained in the one of the VPC you created.</p>
-<p>In this case we want a public IP address to be assign on each instance of the public subnet. In order to do that we must select the subnet, and then presso on Action &gt; Modify auto-assign IP setting. If we don&rsquo;t do that, no public IP address will be assigned ot the instance, and it will be necessary yo use an <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">elastic Ip</a>.</p>
+<p>In this case we want a public IP address to be assigned to each instance of the public subnet. In order to do that we must select the subnet, and then presso on Action &gt; Modify auto-assign IP setting. If we don&rsquo;t do that, no public IP address will be assigned ot the instance, and it will be necessary yo use an <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">elastic Ip</a>.</p>
 <p>You might notice that there is nothing in this setup that makes this subnet public. If we try to start a web server in this subnet we will see indeed that it is not reachable from the internet.</p>
 <p>This is because VPC are by default isolated from the internet. In order to let requests in, we neet an internet gateway, and to open the routes related to the http requests in the route table.</p>
 <p>An internet gateway is a VPC component that allows communication between instances in the VPC and the internet, we are gonna use it to access the internet from the EC2 instances in the public subnet, and to let the requests to the web server in through the route table.<br>
 In order to create an IG, go to Internet gateways &gt; Create internet gateway, after that remember to attach the created IG to your VPC. Only one IG can be attached to a specific VPC.</p>
 <p>After that configure the Route Table of the public subnet in order to allow traffic to the internet(0.0.0.0/0).
 <img src="/create_route_table.png" alt="image"></p>
-<p>Once we have done it, we can create our web server, and configure wordpres!</p>
+<p>Once we have done it, we can create our web server, and configure wordpress!</p>
 <h3 id="creating-the-private-subnet">Creating the private subnet</h3>
 <p>To create the private subnet you can follow the first steps of the previous paragraph, setting as CIDR block <code>10.0.2.0/24</code> in order to differentiate the IP addresses of the two subnets.</p>
 <h3 id="create-the-web-instance">Create the Web instance</h3>
 <p>In order to our application to run, we need to install a web server and a database server.<br>
-For what concerns the web server, we are gonna install <code>httpd</code>, <code>php</code> and then add download wordpress in <code>/var/www/html</code>.<br>
-Let&rsquo;s start by creating a linux instance in EC2.
+We are gonna use Amazon Linux 2 virtual machines, although any other linux distro can be chose, the script might need to be changed accordingly.<br>
+For what concerns the web server, we are gonna install <code>httpd</code>, <code>php</code> and then download wordpress in <code>/var/www/html</code>.<br>
+Let&rsquo;s start by creating a linux instance in EC2.<br>
 Assign the VPC and the public subnet we created in the &ldquo;Configure Instance Details&rdquo; page, edit the &ldquo;User data&rdquo; with the commands to run when the instance is created:
 <img src="/instance_details.png" alt="image"></p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#00f">#!/bin/bash
@@ -102,16 +103,30 @@ mv wordpress/* ./
 <img src="/inbound_rules.png" alt="image"></p>
 <h3 id="create-the-db-instancee">Create the DB instancee</h3>
 <p>For the DB instance we will follow the same procedure of the previous point to create a new instance.<br>
-The subnet we will choose is the private one.<br>
-This time we will configure the script in order to install mysql.</p>
+The subnet we will choose is the private one.
+In order to install mysql we need internet connection, since this instance will be in the private subnet there is no internet gateway associated.  To overcome this issue we create a NAT gateway on the public subnet, we then modify the route table of the private subnet in order to point to that gateway for all the requests torwards the public internet.
+This time we will configure the script in order to install mysql:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#00f">#!/bin/bash
 </span><span style="color:#00f"></span>yum update -y 
-yum install mysql-server 
-systemctl enable mysqld 
+wget https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm
+rpm -ivh mysql57-community-release-el7-9.noarch.rpm
+yum install mysql-server
+systemctl enable mysqld
 systemctl start mysqld
+mysql -e <span style="color:#a31515">&#34;CREATE DATABASE wordpress /*\!40100 DEFAULT CHARACTER SET utf8 */;&#34;</span>
+mysql -e <span style="color:#a31515">&#34;CREATE USER riccardo@localhost IDENTIFIED BY &#39;blah&#39;;&#34;</span>
+mysql -e <span style="color:#a31515">&#34;GRANT ALL PRIVILEGES ON wordpress.* TO riccardo@&#39;%&#39;;&#34;</span>
+mysql -e <span style="color:#a31515">&#34;FLUSH PRIVILEGES;&#34;</span>
 </code></pre></div><h3 id="connect-the-web-server-to-the-db-instance">Connect the WEB server to the DB instance</h3>
-<p>We need to connect the web server to the database, in order to do so, we change the security group of the DB in order to allow mysql connection from the web server.
+<p>We need to connect the web server to the database, in order to do so, we must change the security group of the DB in order to allow mysql connection from the web server, plus ssh connection from the EC2 instance on the public subnet, for system administration.
 <img src="/db_security_group_inbound_rules.png" alt="image"></p>
+<h3 id="install-wordpress">Install Wordpress</h3>
+<p>After all of this we can finally install wordpress.<br>
+To do that, we open in a browser tab, the IP address of of our web instance. After that, we will be prompt to write the params for the connection to mysql. Once this is done, a wp-config file will be displayed on the web page. The content of this file is supposed to be put on the root path of wordpress.<br>
+Note that this step can be automated as well, this time i didn&rsquo;t do it because it&rsquo;s out of scope.
+<img src="/wp_1.png" alt="image">
+<img src="/wp_2.png" alt="image">
+<img src="/wp_3.png" alt="image"></p>
 <h3 id="conclusion">Conclusion</h3>
 <p>My conclusion is that aws allows to easily set up a simple web application.<br>
 Some things to point out:</p>
