@@ -3,8 +3,18 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://pizzaandcode.com/posts/aiohttp_nginx_gunicorn/</loc>
+    <lastmod>2020-11-15T12:51:19+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://pizzaandcode.com/posts/</loc>
-    <lastmod>2020-03-31T18:25:45+02:00</lastmod>
+    <lastmod>2020-11-15T12:51:19+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://pizzaandcode.com/</loc>
+    <lastmod>2020-11-15T12:51:19+01:00</lastmod>
   </url>
   
   <url>
@@ -24,11 +34,6 @@
   
   <url>
     <loc>http://pizzaandcode.com/about/</loc>
-    <lastmod>2019-09-19T19:06:43+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://pizzaandcode.com/</loc>
     <lastmod>2019-09-19T19:06:43+02:00</lastmod>
   </url>
   

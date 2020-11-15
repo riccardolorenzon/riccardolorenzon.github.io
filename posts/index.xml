@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Riccardo Lorenzon&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 31 Mar 2020 18:25:45 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 15 Nov 2020 12:51:19 +0100</lastBuildDate>
     
 	<atom:link href="http://pizzaandcode.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Dockerize your aiohttp app production ready with nginx and gunicorn</title>
+      <link>http://pizzaandcode.com/posts/aiohttp_nginx_gunicorn/</link>
+      <pubDate>Sun, 15 Nov 2020 12:51:19 +0100</pubDate>
+      
+      <guid>http://pizzaandcode.com/posts/aiohttp_nginx_gunicorn/</guid>
+      <description>One of the main purposes of using Docker is to make the production builds easy to package and ship without the overhead of additional configurations. The more configurations necessary to deploy an application, the more likely the whole CD process is gonna break anytime, Docker is a great help on that.
+I have been working with several web frameworks, mostly for Python, usually the deployment process consists of a reverse proxy, nginx or apache, set in front of the application, that eventually forwards requests to an application server, like uwsgi or gunicorn for example.</description>
+    </item>
     
     <item>
       <title>Using AWS Vpc to set up a Wordpress application</title>
